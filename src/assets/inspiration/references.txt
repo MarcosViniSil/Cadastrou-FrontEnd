@@ -1,0 +1,9 @@
+<a href="https://storyset.com/work">Work illustrations by Storyset</a> => 'Checklist-pana'
+
+<a href="https://storyset.com/work">Work illustrations by Storyset</a> => 'Completed-rafiki'
+
+<a href="https://storyset.com/user">User illustrations by Storyset</a> => 'Add tasks-rafiki'
+
+<a href="https://storyset.com/user">User illustrations by Storyset</a> =>'Computer login-bro'
+
+<a href="https://storyset.com/communication">Communication illustrations by Storyset</a> => 'Mail sent-rafiki'
