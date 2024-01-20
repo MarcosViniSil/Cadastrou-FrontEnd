@@ -27,9 +27,9 @@ export class MenuBarComponent {
 
     if (containerLinksMenu != null) {
 
-      if(this.isMenuOpen && window.innerWidth < 768){
+      if(this.isMenuOpen && window.innerWidth < 610){
         containerLinksMenu.style.display ='block'
-      }else if(!this.isMenuOpen && window.innerWidth < 768){
+      }else if(!this.isMenuOpen && window.innerWidth < 610){
         containerLinksMenu.style.display ='none'
       }else{
         containerLinksMenu.style.display ='block'

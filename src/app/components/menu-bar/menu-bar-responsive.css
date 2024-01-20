@@ -1,5 +1,5 @@
 
-@media (max-width: 768px) {
+@media (max-width: 610px) {
     #Menu {
         cursor: pointer;
         display: block;
@@ -29,7 +29,7 @@
     }
     .containerLinksMenu{
         height: 177px;
-        
+        z-index: 2;
         
     }
     .containerLinksMenu ul {

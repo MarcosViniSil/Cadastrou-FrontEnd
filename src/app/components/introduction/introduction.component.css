@@ -1,0 +1,36 @@
+h2{
+    font-family: tahoma;
+    color:rgb(44, 35, 43);
+}
+.containerAll{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.containerText>h2>span{
+    color:rgb(255, 96, 88);
+}
+a{
+    text-decoration: none;
+    color:white;
+}
+.containerText>h3{   
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerText>h3>a{
+    background-color:rgb(44, 35, 43);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 105px;
+    height: 40px;
+}
+.containerText>h3>a:hover{
+    background-color:rgb(255, 96, 88);
+}
+
+

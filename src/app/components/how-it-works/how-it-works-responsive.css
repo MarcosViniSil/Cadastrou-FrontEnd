@@ -1,0 +1,23 @@
+ @media  (max-width: 560px) {
+      .signUp,.registerAnyThing,.reciveEmail{
+        flex-direction: column;
+    }
+    .imageRegisterAny {
+        order: 1;
+        
+      }
+
+} 
+@media  (min-width: 180px) and (max-width:260px)  {
+    .imageSignUp > img,.imageRegisterAny > img, .imageReciveEmail > img {
+       width:150px;
+    }
+    .textSignUp,.textRegisterAny,.textReciveEmail{
+      text-align: center;
+    }
+}
+@media  (min-width: 1150px)   {
+  .imageSignUp > img,.imageRegisterAny > img, .imageReciveEmail > img {
+    width:400px;
+ }
+}
