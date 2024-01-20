@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -12,11 +12,28 @@ import { RouterOutlet } from '@angular/router';
 export class MenuBarComponent {
   isMenuOpen: boolean = false;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.toggleMenuBasedOnWindowSize();
+  }
+
   toggleMenu() {
-    let containerLinksMenu = document.getElementById("responsive-menu");
+    this.isMenuOpen = !this.isMenuOpen;
+    this.toggleMenuBasedOnWindowSize();
+  }
+
+  private toggleMenuBasedOnWindowSize() {
+    const containerLinksMenu = document.getElementById('responsive-menu');
 
     if (containerLinksMenu != null) {
-      containerLinksMenu.style.display = (containerLinksMenu.style.display === "none" || containerLinksMenu.style.display === "") ? "block" : "none";
+
+      if(this.isMenuOpen && window.innerWidth < 768){
+        containerLinksMenu.style.display ='block'
+      }else if(!this.isMenuOpen && window.innerWidth < 768){
+        containerLinksMenu.style.display ='none'
+      }else{
+        containerLinksMenu.style.display ='block'
+      }
     }
   }
 }

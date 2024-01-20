@@ -52,5 +52,7 @@ a {
 #Menu{
     display:none;
 }
-
+.containerLinksMenu,.responsive-menu{
+  display: block;
+}
 
