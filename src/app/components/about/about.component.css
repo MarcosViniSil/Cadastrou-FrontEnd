@@ -1,0 +1,33 @@
+.containerAllAbout{
+    background-color: rgb(239, 231, 228);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+}
+.containerLinks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+.containerLogo{
+    margin-right: auto;
+}
+.containerLogo>h2>a{
+    color:black;
+    padding-left: 10px;
+}
+.containerLinks > ul > li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+a{
+    text-decoration: none;
+}
+ul{
+    list-style: none;
+}
+ul>li>a{
+    color: rgb(59, 53, 52);
+}

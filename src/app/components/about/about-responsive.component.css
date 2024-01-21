@@ -1,0 +1,34 @@
+@media (min-width: 323px) and (max-width: 483px) {
+  .containerAllAbout {
+    display: flex;
+    flex-direction: column;
+  }
+  .containerLogo {
+    margin: auto;
+  }
+  .containerLinks {
+    padding: 10px;
+  }
+}
+@media (min-width: 250px) and (max-width: 325px) {
+  .containerLinks > ul > li {
+    display: block;
+  }
+  .containerLogo {
+    margin-top: 15px;
+  }
+  .containerAllAbout {
+    height: 132px;
+  }
+  .containerLinks > ul > li {
+    margin-bottom: 7px;
+  }
+}
+@media (min-width: 180px) and (max-width: 250px) {
+  .containerLogo {
+    display: none;
+  }
+  .containerLinks > ul > li {
+    margin: 12px;
+  }
+}
