@@ -21,8 +21,11 @@ export class SignUpComponent implements OnInit {
   userForm!: FormGroup;
   showError: Boolean = false;
   messageError: string = '';
-  //private userService: RegisterUserService
-  constructor(private formBuilder: FormBuilder,private userService: RegisterUserService) {}
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: RegisterUserService
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -35,38 +38,37 @@ export class SignUpComponent implements OnInit {
     });
   }
   registerUser() {
-    if (this.userForm != undefined) {
-      if (this.validateName(this.userForm.value.name)) {
-        if (this.validateEmail(this.userForm.value.email)) {
-          if (this.validatePassword(this.userForm.value.password)) {
-            console.log(this.userForm.value);
-              const result = this.userService.registrarUsuario(this.userForm.value)
-              console.log(result)
-              result.subscribe(
-                {
-                  next: (res) => {
-                      console.log(res)
-                  },
-                  error: (err) => console.log(err)
-                }
-               
- 
-               );
-          } else {
-            this.onError('A senha deve conter no minimo 8 e no máximo 20 carateres')
-          }
-        } else {
-          this.onError('Formato de email invalido')
-        }
-      } else {
-        this.onError('Nome invalido')
-      }
+    if (this.validateAllFields()) {
+      const result = this.userService.registerUser(this.userForm.value);
+
+      result.subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          this.onError(err.error.title);
+        },
+      });
     }
+  }
+
+  private validateAllFields(): Boolean {
+    if (
+      this.userForm != undefined &&
+      this.validateName(this.userForm.value.name) &&
+      this.validateEmail(this.userForm.value.email) &&
+      this.validatePassword(this.userForm.value.password)
+    ) {
+      return true;
+    }
+
+    return false;
   }
   private validateName(name: string): Boolean {
     if (name.length > 2) {
       return true;
     } else {
+      this.onError('Nome inválido');
       return false;
     }
   }
@@ -74,6 +76,7 @@ export class SignUpComponent implements OnInit {
     if (password.length >= 8 && password.length <= 20) {
       return true;
     } else {
+      this.onError('A senha deve conter no mínimo 8 e no máximo 20 carateres');
       return false;
     }
   }
@@ -82,16 +85,17 @@ export class SignUpComponent implements OnInit {
     if (emailRegex.test(email)) {
       return true;
     } else {
+      this.onError('Formato de email inválido');
       return false;
     }
   }
 
-  onError(message: string) {
+  private onError(message: string) {
     this.showError = true;
     this.messageError = message;
     setTimeout(() => {
       this.showError = false;
       this.messageError = '';
-    }, 2000);
+    }, 5000);
   }
 }

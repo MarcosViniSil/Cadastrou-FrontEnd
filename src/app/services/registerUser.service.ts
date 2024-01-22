@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   
     constructor(private http: HttpClient) {}
   
-    registrarUsuario(user: any): Observable<any> {
+    registerUser(user: any): Observable<any> {
       return this.http.post(this.apiUrl+"User/Register", user);
     }
   }
