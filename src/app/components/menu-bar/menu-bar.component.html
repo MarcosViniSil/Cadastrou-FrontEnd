@@ -1,7 +1,7 @@
 <div class="containerAllMenu" >
 
 <div class="containerTitle">
-    <h2><a href="#">Cadastrou</a></h2>
+    <h2><a [routerLink]="['']">Cadastrou</a></h2>
 </div>
 
 <span id="Menu" class="material-symbols-outlined" (click)="toggleMenu()" >
@@ -12,7 +12,7 @@
     <li><a href="#">Sobre</a></li>
     <li><a href="#">Código</a></li>
     <li><a href="#">Como funciona?</a></li>
-    <li><div id="divSignUp"><a href="#" id="registerField">Sign up</a></div></li>
+    <li><div id="divSignUp"><a [routerLink]="['cadastrar']"id="registerField">Sign up</a></div></li>
    </ul>
 </div>
 
