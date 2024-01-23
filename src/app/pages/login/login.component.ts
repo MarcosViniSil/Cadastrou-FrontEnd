@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { MenuBarComponent } from '../../components/menu-bar/menu-bar.component';
+import { FormsComponent } from '../../components/validation/forms/forms.component';
 import {
   FormBuilder,
   FormGroup,
@@ -6,59 +8,44 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { FormsComponent } from '../validation/forms/forms.component';
 
 @Component({
-  selector: 'app-sign-up',
+  selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css', './sign-up-responsive.component.css'],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MenuBarComponent],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css', './login-responsive.component.css'],
 })
-export class SignUpComponent implements OnInit {
-
+export class LoginComponent {
+  userForm!: FormGroup;
+  showError: Boolean = false;
+  messageError: String = '';
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
     private validateForm: FormsComponent
   ) {}
-  userForm!: FormGroup;
-  showError:Boolean=false
-  messageError:String=""
   ngOnInit() {
     this.initForm();
     this.subscribeToFormChanges();
   }
   initForm() {
     this.userForm = this.formBuilder.group({
-      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
-  registerUser() {
+  loginUser(): Boolean {
     if (this.validateAllFields()) {
-      const result = this.userService.registerUser(this.userForm.value);
-
-      result.subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          this.validateForm.onError(err.error.title);
-        },
-      });
+      return true;
+    } else {
+      return false;
     }
   }
 
   private validateAllFields(): Boolean {
-    
     if (
       this.userForm != undefined &&
-      this.validateForm.validateName(this.userForm.value.name) &&
       this.validateForm.validateEmail(this.userForm.value.email) &&
       this.validateForm.validatePassword(this.userForm.value.password)
     ) {
