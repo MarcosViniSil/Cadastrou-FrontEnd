@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './validation-email.component.html',
-  styleUrl: './validation-email.component.css'
+  styleUrls: ['./validation-email.component.css','./validation-email-responsive.css']
 })
 export class ValidationEmailComponent {
     isSend:Boolean=false
@@ -19,5 +19,9 @@ export class ValidationEmailComponent {
 
     validateCode(){
        
+    }
+
+    correctionEmail(){
+      this.isSend=false
     }
 }
