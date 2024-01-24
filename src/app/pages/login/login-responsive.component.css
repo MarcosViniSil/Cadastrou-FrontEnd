@@ -1,0 +1,50 @@
+@media (min-width: 600px) and (max-width: 731px) {
+    .containerImage > img {
+      width: 300px;
+    }
+  }
+  @media (min-width: 500px) and (max-width: 600px) {
+    .containerImage > img {
+      width: 240px;
+    }
+  }
+  @media (min-width: 220px) and (max-width: 500px) {
+    .containerImage > img {
+      width: 200px;
+      height: 200px;
+    }
+    .conainerAllLogin {
+      display: flex;
+      flex-direction: column;
+    }
+    .containerForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 5px;
+    }
+    .containerImage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .containerForm > h2 {
+      padding-left: 10px;
+    }
+  }
+  @media (min-width: 180px) and (max-width: 219px) {
+    .containerImage {
+      display: none;
+    }
+    .containerForm {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .containerForm > h2 {
+      padding-left: 10px;
+    }
+  }
+  

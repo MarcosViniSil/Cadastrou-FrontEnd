@@ -1,0 +1,6 @@
+@media (min-width: 180px) and (max-width: 450px) {
+    input {
+        width: 85vw;
+
+      }
+}

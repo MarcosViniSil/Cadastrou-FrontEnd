@@ -1,0 +1,51 @@
+.containerAll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin:5px;
+}
+
+.containerTypeEmail,.containerConfirmCode{
+    width: 70vw;
+}
+.containerConfirmCode,.containerTypeEmail{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+input {
+  width: 70%;
+  padding: 5px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+.sendDatas {
+  background-color: rgb(46, 45, 45);
+  border: none;
+  width: 100px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+}
+.sendDatas > p {
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.sendDatas:active {
+  position: relative;
+  top: 2px;
+}
+.containerConfirmCode > a {
+  text-decoration: underline;
+  margin-top: 7px;
+  cursor:pointer;
+  margin-bottom: 7px;
+  font-weight: bold;
+}

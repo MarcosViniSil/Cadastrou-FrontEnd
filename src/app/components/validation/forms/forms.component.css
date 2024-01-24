@@ -1,0 +1,8 @@
+.warning{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    color: red;
+    font-size: 18px;
+  }

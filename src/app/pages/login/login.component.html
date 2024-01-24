@@ -1,0 +1,40 @@
+
+<header>
+    <nav>
+      <div class="containerMenu">
+        <app-menu-bar id="menu"></app-menu-bar>
+      </div>
+    </nav>
+</header>
+<main>
+    <div *ngIf="showError" class="warning">
+        {{  messageError }}
+      </div>
+    <div class="conainerAllLogin">
+        <div class="containerImage">
+
+            <img src="../../../assets/images/Mobile login-bro.svg" alt="imagem login" width="400px" height="400px">
+
+        </div>
+        <div class="containerForm">
+            <h2>Informe seus dados para o Login</h2>
+            <form [formGroup]="userForm">
+
+                <label for="email">Email</label> <br>
+                <input formControlName="email" required type="email" id="email"> <br>
+        
+                <label for="password">Senha</label> <br>
+                <input formControlName="password" required minlength="8" maxlength="20" type="password" id="password"><br>
+
+                 <a href="#">Esqueci minha senha</a>
+                 
+                 <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                     <div class="sendDatas">
+                        <p (click)="loginUser()">Login</p>
+                    </div>
+                 </div>
+        
+            </form>
+        </div>
+    </div>
+</main>
