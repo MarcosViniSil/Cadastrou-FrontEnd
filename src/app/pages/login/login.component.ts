@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuBarComponent } from '../../components/menu-bar/menu-bar.component';
 import { FormsComponent } from '../../components/validation/forms/forms.component';
+import { UserService } from '../../services/user.service';
 import {
   FormBuilder,
   FormGroup,
@@ -9,6 +10,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,9 @@ export class LoginComponent {
   messageError: String = '';
   constructor(
     private formBuilder: FormBuilder,
-    private validateForm: FormsComponent
+    private validateForm: FormsComponent,
+    private userService: UserService,
+    private tokenService:TokenService
   ) {}
   ngOnInit() {
     this.initForm();
@@ -35,14 +39,23 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
-  loginUser(): Boolean {
+  loginUser() {
     if (this.validateAllFields()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+      const result = this.userService.loginUser(this.userForm.value);
 
+      result.subscribe({
+        next: (res:any) => {
+          const token = res.token
+          this.tokenService.setToken(token)
+          //TODO redirecionar para a pagina de cadastros
+        },
+        error: (err) => {
+          this.validateForm.onError(err.error.title);
+        },
+      });
+    } 
+  }
+//testeLoginAngular@gmail.com
   private validateAllFields(): Boolean {
     if (
       this.userForm != undefined &&

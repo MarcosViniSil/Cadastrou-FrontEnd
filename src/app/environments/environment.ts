@@ -1,4 +1,5 @@
-export const environment = {
+export const api = {
     production: false,
-    register: 'http://localhost:8080/User/Register'
+    urlUser: 'http://localhost:8080/User/'
+
   };

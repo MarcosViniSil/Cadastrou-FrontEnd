@@ -7,10 +7,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsComponent } from './components/validation/forms/forms.component';
+import { ValidationEmailComponent } from './components/validation/validation-email/validation-email.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HomeComponent,SignUpComponent,RouterLink,RouterLinkActive,RegisterComponent,HttpClientModule,LoginComponent],
+  imports: [CommonModule, RouterOutlet,HomeComponent,SignUpComponent,RouterLink,RouterLinkActive,RegisterComponent,HttpClientModule,LoginComponent,ValidationEmailComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

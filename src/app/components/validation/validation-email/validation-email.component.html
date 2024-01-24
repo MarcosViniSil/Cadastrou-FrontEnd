@@ -1,0 +1,12 @@
+<div class="containerAll">
+  <div *ngIf="!isSend" class="containerTypeEmail">
+    <h2>Digite se email para começar</h2>
+    <input type="email" name="" id="emailUser" />
+    <p (click)="sendCode()">Enviar código</p>
+  </div>
+
+  <div *ngIf="isSend" class="containerConfirmCode">
+    <input type="text" name="" id="codeUser" />
+    <p (click)="validateCode()">Confirmar código</p>
+  </div>
+</div>

@@ -26,7 +26,6 @@ export class FormsComponent {
    validateName(name: string): Boolean {
  
     if (name.length > 2) {
-      console.log("invalido")
       return true;
     } else {
       this.onError('Nome inválido');
@@ -38,8 +37,7 @@ export class FormsComponent {
     if (password.length >= 8 && password.length <= 20) {
       return true;
     } else {
-      console.log("invalido")
-      this.onError('A senha deve conter no mínimo 8 e no máximo 20 carateres');
+      this.onError('A senha deve conter no mínimo 8 e no máximo 20 caracteres');
       return false;
     }
   }

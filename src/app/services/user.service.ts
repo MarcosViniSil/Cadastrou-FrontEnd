@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../environments/environment';
+import { api } from '../environments/environment';
 import  {RegisterData} from '../models/registerData'
+import { LoginData } from '../models/loginData';
 
 
 @Injectable({
@@ -10,11 +11,15 @@ import  {RegisterData} from '../models/registerData'
   })
 
   export class UserService {
-    private apiUrl = environment.register;
+    private apiUrl = api.urlUser;
   
     constructor(private http: HttpClient) {}
   
-    registerUser(user: RegisterData): Observable<any> {
-      return this.http.post(this.apiUrl, user);
+    registerUser(register: RegisterData): Observable<any> {
+      return this.http.post(this.apiUrl+"Register", register);
+    }
+
+    loginUser(login:LoginData){
+        return this.http.post(this.apiUrl+"Login",login)
     }
   }

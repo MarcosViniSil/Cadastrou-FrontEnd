@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { FormsComponent } from '../validation/forms/forms.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -23,7 +24,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private validateForm: FormsComponent
+    private validateForm: FormsComponent,
+    private router: Router
   ) {}
   userForm!: FormGroup;
   showError:Boolean=false
@@ -46,6 +48,9 @@ export class SignUpComponent implements OnInit {
       result.subscribe({
         next: (res) => {
           console.log(res);
+          if(res==null){
+            this.router.navigate(['login']);
+          }
         },
         error: (err) => {
           this.validateForm.onError(err.error.title);
