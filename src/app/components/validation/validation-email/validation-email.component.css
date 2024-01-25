@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 99%;
   margin:5px;
 }
 
@@ -48,4 +48,13 @@ input {
   cursor:pointer;
   margin-bottom: 7px;
   font-weight: bold;
+}
+
+.warning{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px;
+  color: red;
+  font-size: 18px;
 }
