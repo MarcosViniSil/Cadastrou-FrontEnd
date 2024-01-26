@@ -1,3 +1,4 @@
+
 <div class="containerAllMenu" >
 
 <div class="containerTitle">
@@ -12,7 +13,8 @@
     <li><a href="#">Sobre</a></li>
     <li><a href="#">Código</a></li>
     <li><a href="#">Como funciona?</a></li>
-    <li><div id="divSignUp"><a [routerLink]="['email']"id="registerField">Sign up</a></div></li>
+    <li *ngIf="showLogin"><div id="divLogin"><a (click)="linkLogin()" id="loginField">Login</a></div></li>
+    <li *ngIf="showSignUp"><div id="divSignUp"><a (click)="linkEmail()"id="registerField">Sign up</a></div></li>
    </ul>
 </div>
 

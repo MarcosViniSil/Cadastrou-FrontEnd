@@ -6,20 +6,31 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TokenService {
+
   setToken(token: string) {
-    let dataActual = new Date();
-    let dataPlus = new Date(dataActual.getTime() + 2 * 60 * 60 * 1000);
-    let expirationDate = new Date(dataPlus.getTime() - 3 * 60 * 60 * 1000);
     localStorage.setItem('JWT', token);
-    localStorage.setItem('ExpirationDate', expirationDate.toDateString());
+    
+  }
 
+  setDateExpiration() {
+    let dataActual = new Date();
 
+    dataActual.setHours(dataActual.getHours() + 24);
+
+    let hours = String(dataActual.getHours()).padStart(2, '0');
+    let minutes = String(dataActual.getMinutes()).padStart(2, '0');
+    let day = String(dataActual.getDate()).padStart(2, '0');
+    let month = String(dataActual.getMonth() + 1).padStart(2, '0'); 
+    let year = dataActual.getFullYear();
+
+    let dateFormated = `${hours}:${minutes} ${day}/${month}/${year}`;
+    localStorage.setItem('ExpirationDate', dateFormated);
   }
 
   getToken(): string | null {
     return localStorage.getItem('JWT');
   }
-  getDateExpiration(){
+  getDateExpiration() {
     return localStorage.getItem('ExpirationDate');
   }
   createAuthorizationHeader(): HttpHeaders | null {

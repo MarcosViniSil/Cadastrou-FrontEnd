@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import {FormBuilder,FormGroup,Validators,FormsModule,ReactiveFormsModule,} from '@angular/forms';
 import {FormsComponent} from '../forms/forms.component'
 import { codesData } from '../../../models/validateCodesData';
-
+import { UserService } from '../../../services/user.service';
 @Component({
   selector: 'app-validation-email',
   standalone: true,
@@ -27,7 +27,9 @@ export class ValidationEmailComponent implements OnInit {
       private formBuilder: FormBuilder,
       private validateForm: FormsComponent,
       private router: Router,
-      private emailService:ValidateEmailService
+      private emailService:ValidateEmailService,
+      private userService: UserService
+      
       
     ) {}
     ngOnInit() {
@@ -50,17 +52,13 @@ export class ValidationEmailComponent implements OnInit {
           const response=this.emailService.sendCodeEmail(email)
           response.subscribe({
             next: (res:any) => {
-              console.log("resposta")
               console.log(res);
-              console.log(this.userForm.value.email)
               localStorage.setItem('Code', res.code);
-              localStorage.setItem('email', this.userForm.value.email);
-              console.log("code armaz1",localStorage.getItem("Code"))
+              this.userService.setEmailUser(this.userForm.value.email)
               this.isSend=true
             },
             error: (err) => {
-              console.log("erro")
-              console.log(err)
+            
               this.validateForm.onError(err.error.title);
             },
           });
@@ -83,7 +81,6 @@ export class ValidationEmailComponent implements OnInit {
             const response=this.emailService.validateCodeEmail(codes)
             response.subscribe({
               next: (res:any) => {
-                console.log("resposta")
                 console.log(res);
                 if(res==null){
                   this.router.navigate(['cadastrar']);
@@ -91,8 +88,6 @@ export class ValidationEmailComponent implements OnInit {
   
               },
               error: (err) => {
-                console.log("erro")
-                console.log(err)
                 this.validateForm.onError(err.error.title);
               },
             });

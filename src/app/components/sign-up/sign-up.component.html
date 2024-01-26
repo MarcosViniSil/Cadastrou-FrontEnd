@@ -8,7 +8,7 @@
     </div>
     <div class="containerForm">
         <h2>Informe seus dados para o cadastro</h2>
-        <form [formGroup]="userForm" >
+        <form [formGroup]="userForm" *ngIf="userForm" >
         <label for="name">Nome</label> <br>
         <input formControlName="name" required placeholder="Digite seu nome" type="text" id="name"> <br>
 
