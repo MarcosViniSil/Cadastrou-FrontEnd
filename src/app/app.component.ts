@@ -9,6 +9,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { FormsComponent } from './components/validation/forms/forms.component';
 import { ValidationEmailComponent } from './components/validation/validation-email/validation-email.component';
 import { EmailComponent } from './pages/email/email.component';
+import { NotFound404Component } from './pages/not-found404/not-found404.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -24,6 +25,7 @@ import { EmailComponent } from './pages/email/email.component';
     LoginComponent,
     ValidationEmailComponent,
     EmailComponent,
+    NotFound404Component
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
