@@ -10,6 +10,7 @@ import { FormsComponent } from './components/validation/forms/forms.component';
 import { ValidationEmailComponent } from './components/validation/validation-email/validation-email.component';
 import { EmailComponent } from './pages/email/email.component';
 import { NotFound404Component } from './pages/not-found404/not-found404.component';
+import { SignUpADMComponent } from './pages/sign-up-adm/sign-up-adm.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,7 +26,8 @@ import { NotFound404Component } from './pages/not-found404/not-found404.componen
     LoginComponent,
     ValidationEmailComponent,
     EmailComponent,
-    NotFound404Component
+    NotFound404Component,
+    SignUpADMComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

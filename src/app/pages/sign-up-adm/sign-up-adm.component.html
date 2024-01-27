@@ -1,0 +1,45 @@
+<header>
+    <nav>
+        <div class="containerMenu">
+            <app-menu-bar [showSignUp]="false"></app-menu-bar>
+         </div>
+    </nav>
+</header>
+
+<main>
+    <div *ngIf="showError" class="warning">
+        {{  messageError }}
+      </div>
+    <div class="containerAllSign">
+        <div class="containerImage">
+            <img src="../../../assets/images/2Sign.svg" alt="signUp" width="400px" height="400px">
+        </div>
+        <div class="containerFormAdm">
+            <h2>Informe seus dados para o cadastro</h2>
+            <form [formGroup]="userForm" *ngIf="userForm" >
+
+            <label for="name">Nome</label> <br>
+            <input formControlName="name" required placeholder="Digite seu nome" type="text" id="name"> <br>
+            
+            <label for="email">Email</label> <br>
+            <input formControlName="email" required placeholder="Digite um email valido" type="email" id="email"> <br>
+            
+            <label for="password">Senha</label> <br>
+            <input formControlName="password" required minlength="8" maxlength="20" placeholder="senha deve ter entre 8 e 20 caracteres" type="password" id="password"><br>
+        
+            <label for="hash">hash</label> <br>
+            <input formControlName="hash" required  type="password" id="hash"><br>
+            
+            <label for="passwordAdm">senha ADM</label> <br>
+            <input formControlName="passwordAdm" required  type="password" id="passwordAdm"><br>
+            
+            <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                 <div class="sendDatas">
+                    <p (click)="registerAdm()" >Enviar</p>
+                </div>
+               
+             </div>
+            </form>
+        </div>
+    </div>
+</main>

@@ -3,10 +3,8 @@
 </div>
 <div class="containerAll">
   <div *ngIf="!isSend" class="containerTypeEmail">
-    <h2>Digite seu email</h2>
-
-   
-      <form [formGroup]="userForm">
+    <h3>Digite seu email</h3>
+      <form [formGroup]="userForm" class="containerTypeEmail">
         <input  formControlName="email" type="email" name="emailUser"  id="emailUser" />
         <div class="sendDatas">
           <p (click)="sendCode()">Enviar código</p>
@@ -16,9 +14,9 @@
   </div>
 
    <div *ngIf="isSend" class="containerConfirmCode">
-    <h2>Digite o código enviado para o email informado</h2>
+    <h3>Digite o código enviado para o email informado</h3>
 
-    <form [formGroup]="userForm2">
+    <form [formGroup]="userForm2" class="containerConfirmCode">
       <input formControlName="text" type="text"  id="codeUser" />
       <div class="sendDatas">
         <p (click)="validateCode()">Confirmar</p>

@@ -35,6 +35,7 @@ export class ValidationEmailComponent implements OnInit {
     ngOnInit() {
       this.initForm()
       this.subscribeToFormChanges();
+      //localStorage.setItem('Code', "");//possible error
     }
     initForm() {
       this.userForm = this.formBuilder.group({
@@ -82,7 +83,10 @@ export class ValidationEmailComponent implements OnInit {
             response.subscribe({
               next: (res:any) => {
                 console.log(res);
+                
                 if(res==null){
+                  localStorage.setItem('Code', "");
+                  //localStorage.removeItem('login')
                   this.router.navigate(['cadastrar']);
                 }
   

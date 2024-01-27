@@ -35,7 +35,7 @@
     margin-top: 5px;
   }
 }
-@media (min-width: 180px) and (max-width: 219px) {
+@media (min-width: 170px) and (max-width: 219px) {
   .containerImage {
     display: none;
   }
