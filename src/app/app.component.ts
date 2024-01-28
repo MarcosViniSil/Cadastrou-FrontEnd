@@ -11,6 +11,7 @@ import { ValidationEmailComponent } from './components/validation/validation-ema
 import { EmailComponent } from './pages/email/email.component';
 import { NotFound404Component } from './pages/not-found404/not-found404.component';
 import { SignUpADMComponent } from './pages/sign-up-adm/sign-up-adm.component';
+import { RegisterCardComponent } from './components/register-card/register-card.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -27,7 +28,8 @@ import { SignUpADMComponent } from './pages/sign-up-adm/sign-up-adm.component';
     ValidationEmailComponent,
     EmailComponent,
     NotFound404Component,
-    SignUpADMComponent
+    SignUpADMComponent,
+    RegisterCardComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

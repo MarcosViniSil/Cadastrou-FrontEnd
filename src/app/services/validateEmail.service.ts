@@ -13,12 +13,24 @@ export class ValidateEmailService {
     constructor(private http: HttpClient) {}
 
     sendCodeEmail(email:string):Observable<any>{
-      console.log(this.apiUrl+"Email/"+email)
         return this.http.get(this.apiUrl+"Email/"+email)
     }
     validateCodeEmail(codes:codesData):Observable<any>{
-      console.log(codes)
          return this.http.post(this.apiUrl+"Code",codes)
+    }
+    removeCodeEmail(){
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem('Code')
+        }
+    }
+    getCodeEmail(){
+      if (typeof localStorage !== 'undefined') {
+        return localStorage.getItem('Code');
+      }
+      return null;
+    }
+    setCodeEmail(code:string){
+      return localStorage.setItem('Code',code)
     }
 
 }

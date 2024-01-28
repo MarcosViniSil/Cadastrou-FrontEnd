@@ -61,7 +61,7 @@ export class SignUpComponent implements OnInit {
        
         next: (res) => {
           if (res == null) {
-            this.userService.setEmailUser("")
+            this.userService.removeEmailUser()
             this.router.navigate(['login']);
           }
         },

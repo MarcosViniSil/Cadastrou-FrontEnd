@@ -6,14 +6,16 @@ import { ValidationEmailComponent } from './components/validation/validation-ema
 import { EmailComponent } from './pages/email/email.component';
 import { NotFound404Component } from './pages/not-found404/not-found404.component';
 import { SignUpADMComponent } from './pages/sign-up-adm/sign-up-adm.component';
+import { RegisterCardComponent } from './components/register-card/register-card.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'cadastrar', component: RegisterComponent, pathMatch: 'full' },
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'email', component: EmailComponent, pathMatch: 'full' },
-  {path:'cadastrar/adm',component:SignUpADMComponent,pathMatch: 'full'},
-  {path: '**',component:NotFound404Component,pathMatch: 'full'},
+  { path: 'cadastrar/adm',component:SignUpADMComponent,pathMatch: 'full'},
+  { path: 'logado',component:RegisterCardComponent,pathMatch: 'full'},
+  { path: '**',component:NotFound404Component,pathMatch: 'full'},
   
       
 

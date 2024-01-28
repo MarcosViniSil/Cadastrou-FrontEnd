@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import {FormBuilder,FormGroup,Validators,FormsModule,ReactiveFormsModule,} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private validateForm: FormsComponent,
     private userService: UserService,
-    private tokenService:TokenService
+    private tokenService:TokenService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -46,7 +48,8 @@ export class LoginComponent {
         next: (res:any) => {
           const token = res.token
           this.tokenService.setToken(token)
-          //TODO redirecionar para a pagina de cadastros
+          this.tokenService.setDateExpiration()
+          this.router.navigate(['logado'])
         },
         error: (err) => {
           this.validateForm.onError(err.error.title);

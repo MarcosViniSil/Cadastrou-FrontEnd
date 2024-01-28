@@ -35,7 +35,7 @@ export class ValidationEmailComponent implements OnInit {
     ngOnInit() {
       this.initForm()
       this.subscribeToFormChanges();
-      //localStorage.setItem('Code', "");//possible error
+      this.emailService.removeCodeEmail()
     }
     initForm() {
       this.userForm = this.formBuilder.group({
@@ -53,8 +53,7 @@ export class ValidationEmailComponent implements OnInit {
           const response=this.emailService.sendCodeEmail(email)
           response.subscribe({
             next: (res:any) => {
-              console.log(res);
-              localStorage.setItem('Code', res.code);
+              this.emailService.setCodeEmail(res.code)
               this.userService.setEmailUser(this.userForm.value.email)
               this.isSend=true
             },
@@ -70,14 +69,14 @@ export class ValidationEmailComponent implements OnInit {
   
 
     validateCode(){
-      console.log("code armaz2",localStorage.getItem("Code"))
-      if (localStorage.getItem("Code") !== null) {
-        const a: string | null = localStorage.getItem("Code");
       
-        if (a !== null) {
+      if (localStorage.getItem("Code") !== null) {
+        const codeCripty: string | null = this.emailService.getCodeEmail()
+      
+        if (codeCripty !== null) {
           const codes: codesData = {
             codeUser: this.userForm2.value.text,
-            codeToken: a,};
+            codeToken: codeCripty,};
 
             const response=this.emailService.validateCodeEmail(codes)
             response.subscribe({
@@ -85,8 +84,7 @@ export class ValidationEmailComponent implements OnInit {
                 console.log(res);
                 
                 if(res==null){
-                  localStorage.setItem('Code', "");
-                  //localStorage.removeItem('login')
+                  this.emailService.removeCodeEmail()
                   this.router.navigate(['cadastrar']);
                 }
   

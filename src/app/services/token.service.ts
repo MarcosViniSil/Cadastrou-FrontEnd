@@ -28,10 +28,16 @@ export class TokenService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('JWT');
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem('JWT');
+    }
+    return null
   }
-  getDateExpiration() {
+  getDateExpiration():string | null {
+    if (typeof localStorage !== 'undefined') {
     return localStorage.getItem('ExpirationDate');
+    }
+    return null
   }
   createAuthorizationHeader(): HttpHeaders | null {
     const token = this.getToken();

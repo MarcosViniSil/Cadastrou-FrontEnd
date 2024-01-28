@@ -29,4 +29,10 @@ export class UserService {
   setEmailUser(email:string){
     return localStorage.setItem('email',email)
   }
+  removeEmailUser(){
+    if (typeof localStorage !== 'undefined') {
+    localStorage.removeItem('email')
+    }
+  }
+
 }
