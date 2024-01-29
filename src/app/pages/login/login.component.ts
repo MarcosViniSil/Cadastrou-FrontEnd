@@ -6,11 +6,12 @@ import {FormBuilder,FormGroup,Validators,FormsModule,ReactiveFormsModule,} from 
 import { CommonModule } from '@angular/common';
 import { TokenService } from '../../services/token.service';
 import { Router } from '@angular/router';
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, MenuBarComponent],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MenuBarComponent,LoadingComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css', './login-responsive.component.css'],
 })
@@ -19,7 +20,7 @@ export class LoginComponent {
   userForm!: FormGroup;
   showError: Boolean = false;
   messageError: String = '';
-
+  isLoginAvailable:boolean=true
   constructor(
     private formBuilder: FormBuilder,
     private validateForm: FormsComponent,
@@ -41,20 +42,24 @@ export class LoginComponent {
   }
   
   loginUser() {
+    if(this.isLoginAvailable){
     if (this.validateAllFields()) {
       const result = this.userService.loginUser(this.userForm.value);
-
+      this.isLoginAvailable=false
       result.subscribe({
         next: (res:any) => {
           const token = res.token
           this.tokenService.setToken(token)
           this.tokenService.setDateExpiration()
+          this.isLoginAvailable=true
           this.router.navigate(['logado'])
         },
         error: (err) => {
+          this.isLoginAvailable=true
           this.validateForm.onError(err.error.title);
         },
       });
+    }
     } 
   }
 

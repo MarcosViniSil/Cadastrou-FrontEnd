@@ -1,0 +1,51 @@
+
+@media (max-width: 640px) {
+    #Menu {
+        cursor: pointer;
+        display: block;
+    }
+
+    .containerAll {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    
+    }
+
+    .containerTitle,
+    #Menu,
+    #responsive-menu {
+        width: 100%;
+    }
+
+    .containerTitle,
+    #Menu {
+        order: 1;
+    }
+
+    #responsive-menu {
+        order: 3;
+    }
+    .containerLinksLogged{
+        height: 177px;
+        z-index: 2;
+        
+    }
+    .containerLinksLogged ul {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+   
+    }
+
+    .containerLinksLogged ul li {
+        margin: 0;
+        margin-bottom: 5px;
+        width: 100%;
+        padding: 7px;
+    }
+
+    .containerLinksLogged {
+        display: none;
+    }
+}

@@ -1,114 +1,135 @@
-import { Component,OnInit,ViewChild,ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet,RouterLink,RouterLinkActive } from '@angular/router'
-import { ValidateEmailService } from '../../../services/validateEmail.service'; 
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { ValidateEmailService } from '../../../services/validateEmail.service';
 import { Router } from '@angular/router';
-import {FormBuilder,FormGroup,Validators,FormsModule,ReactiveFormsModule,} from '@angular/forms';
-import {FormsComponent} from '../forms/forms.component'
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { FormsComponent } from '../forms/forms.component';
 import { codesData } from '../../../models/validateCodesData';
 import { UserService } from '../../../services/user.service';
+import { LoadingComponent } from '../../loading/loading.component';
 @Component({
   selector: 'app-validation-email',
   standalone: true,
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, LoadingComponent],
   templateUrl: './validation-email.component.html',
-  styleUrls: ['./validation-email.component.css','./validation-email-responsive.css']
+  styleUrls: [
+    './validation-email.component.css',
+    './validation-email-responsive.css',
+  ],
 })
 export class ValidationEmailComponent implements OnInit {
-    isSend:Boolean=false
-    showError:Boolean=false
-    messageError:String=""
-    emailUser:string=""
-    codeUser:string=""
-    userForm!: FormGroup;
-    userForm2!: FormGroup;
+  isSendCode: Boolean = true;
+  showError: Boolean = false;
+  messageError: String = '';
+  emailUser: string = '';
+  codeUser: string = '';
+  userForm!: FormGroup;
+  userForm2!: FormGroup;
+  isSendCodeAvaliable: boolean = true;
+  isValidateCodeAvailable: boolean = true;
 
-    constructor(
-      private formBuilder: FormBuilder,
-      private validateForm: FormsComponent,
-      private router: Router,
-      private emailService:ValidateEmailService,
-      private userService: UserService
-      
-      
-    ) {}
-    ngOnInit() {
-      this.initForm()
-      this.subscribeToFormChanges();
-      this.emailService.removeCodeEmail()
-    }
-    initForm() {
-      this.userForm = this.formBuilder.group({
-        email: ['', [Validators.required, Validators.email]]
-      });
-      this.userForm2 = this.formBuilder.group({
-        text: ['', [Validators.required]]
-      });
-    }
+  constructor(
+    private formBuilder: FormBuilder,
+    private validateForm: FormsComponent,
+    private router: Router,
+    private emailService: ValidateEmailService,
+    private userService: UserService
+  ) {}
+  ngOnInit() {
+    this.initForm();
+    this.subscribeToFormChanges();
+    this.emailService.removeCodeEmail();
+  }
+  initForm() {
+    this.userForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+    this.userForm2 = this.formBuilder.group({
+      text: ['', [Validators.required]],
+    });
+  }
 
-    sendCode(){
+  sendCode() {
+    if (this.isSendCodeAvaliable) {
+      if (this.validateForm.validateEmail(this.userForm.value.email)) {
+        this.isSendCodeAvaliable = false
         
-        if(this.validateForm.validateEmail(this.userForm.value.email)){
-          const email=this.userForm.value.email
-          const response=this.emailService.sendCodeEmail(email)
-          response.subscribe({
-            next: (res:any) => {
-              this.emailService.setCodeEmail(res.code)
-              this.userService.setEmailUser(this.userForm.value.email)
-              this.isSend=true
-            },
-            error: (err) => {
+        
+        const email = this.userForm.value.email;
+        const response = this.emailService.sendCodeEmail(email);
+        response.subscribe({
+          next: (res: any) => {
+            this.emailService.setCodeEmail(res.code);
+            this.userService.setEmailUser(this.userForm.value.email);
+            this.isSendCodeAvaliable = true;
+            this.isSendCode = false;
             
-              this.validateForm.onError(err.error.title);
-            },
-          });
-          
-        }
+          },
+          error: (err) => {
+            this.isSendCodeAvaliable = true;
+            console.log(err)
+            if(err.status!=0){
+            this.validateForm.onError(err.error.title);
+            }else{
+              this.validateForm.onError("Ocorreu um erro, tente novamente")
+            }
+          },
+        });
       }
-      
-  
+    }
+  }
 
-    validateCode(){
-      
-      if (localStorage.getItem("Code") !== null) {
-        const codeCripty: string | null = this.emailService.getCodeEmail()
-      
+  validateCode() {
+    if (this.isValidateCodeAvailable) {
+      this.isValidateCodeAvailable = false
+      if (localStorage.getItem('Code') !== null) {
+        const codeCripty: string | null = this.emailService.getCodeEmail();
+
         if (codeCripty !== null) {
           const codes: codesData = {
             codeUser: this.userForm2.value.text,
-            codeToken: codeCripty,};
+            codeToken: codeCripty,
+          };
 
-            const response=this.emailService.validateCodeEmail(codes)
-            response.subscribe({
-              next: (res:any) => {
-                console.log(res);
-                
-                if(res==null){
-                  this.emailService.removeCodeEmail()
-                  this.router.navigate(['cadastrar']);
-                }
-  
-              },
-              error: (err) => {
-                this.validateForm.onError(err.error.title);
-              },
-            });
+          const response = this.emailService.validateCodeEmail(codes);
+          response.subscribe({
+            next: (res: any) => {
+              console.log(res);
 
+              if (res == null) {
+                this.emailService.removeCodeEmail();
+                this.isValidateCodeAvailable = true
+                this.router.navigate(['cadastrar']);
+              }
+            },
+            error: (err) => {
+              this.isValidateCodeAvailable = true;
+              this.validateForm.onError(err.error.title);
+            },
+          });
+        }else{
+          this.validateForm.onError("Ocorreu algum erro, solicite o código novamente");
         }
       }
-      
-      
     }
+  }
 
-    correctionEmail(){
-      this.isSend=false
-    }
-    subscribeToFormChanges() {
-      this.validateForm.showError$.subscribe((showError) => {
-        this.showError = showError;
-      });
-      this.validateForm.messageError$.subscribe((messageError) => {
-        this.messageError = messageError;
-      });
-    }
+  correctionEmail() {
+    this.isSendCode = true;
+  }
+  subscribeToFormChanges() {
+    this.validateForm.showError$.subscribe((showError) => {
+      this.showError = showError;
+    });
+    this.validateForm.messageError$.subscribe((messageError) => {
+      this.messageError = messageError;
+    });
+  }
 }

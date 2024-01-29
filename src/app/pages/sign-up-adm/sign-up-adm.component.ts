@@ -12,10 +12,11 @@ import { FormsComponent } from '../../components/validation/forms/forms.componen
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AdmService } from '../../services/adm.service';
+import { LoadingComponent } from '../../components/loading/loading.component';
 @Component({
   selector: 'app-sign-up-adm',
   standalone: true,
-  imports: [MenuBarComponent, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [MenuBarComponent, FormsModule, ReactiveFormsModule, CommonModule,LoadingComponent],
   templateUrl: './sign-up-adm.component.html',
   styleUrls: ['./sign-up-adm.component.css', './sign-up-adm-responsive.css'],
 })
@@ -23,6 +24,7 @@ export class SignUpADMComponent implements OnInit {
   userForm!: FormGroup;
   showError: Boolean = false;
   messageError: String = '';
+  isRegisterAvailable:boolean=true
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,19 +47,23 @@ export class SignUpADMComponent implements OnInit {
   }
 
   registerAdm() {
+    if(this.isRegisterAvailable){
     if (this.validateFields()) {
       const result = this.admService.registerAdm(this.userForm.value);
-
+      this.isRegisterAvailable=false
       result.subscribe({
         next: (res) => {
           if (res == null) {
+            this.isRegisterAvailable=true
             this.router.navigate(['login']);
           }
         },
         error: (err) => {
+          this.isRegisterAvailable=true
           this.validateForm.onError(err.error.title);
         },
       });
+    }
     }
   }
   private validateFields(): Boolean {

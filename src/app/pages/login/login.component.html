@@ -29,9 +29,10 @@
                  <a href="#">Esqueci minha senha</a>
                  
                  <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                     <div class="sendDatas">
+                     <div *ngIf="isLoginAvailable" class="sendDatas">
                         <p (click)="loginUser()">Login</p>
                     </div>
+                    <app-loading *ngIf="!isLoginAvailable"></app-loading>
                  </div>
         
             </form>

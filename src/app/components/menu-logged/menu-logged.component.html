@@ -1,0 +1,16 @@
+<div class="containerAll">
+    <div class="containerTitle">
+        <h2><a [routerLink]="['']">Cadastrou</a></h2>
+    </div>
+    <span id="Menu" class="material-symbols-outlined" (click)="toggleMenu()"  >
+        menu
+    </span>
+    <div class="containerLinksLogged" id="responsive-menu">
+        <ul>
+            <li><a href="#">Perfil</a></li>
+            <li *ngIf="isToShowRegistrations"><a href="#">Cadastros</a></li>
+            <li *ngIf="isUserAdm" ><a href="#">ADM</a></li>
+            <li ><a href="#">Sair</a></li>
+           </ul>
+    </div>
+</div>

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { SessionService } from '../../services/session.service';
 import { Router } from '@angular/router';
 @Component({
-  selector: 'app-register-card',
+  selector: 'app-choose-action',
   standalone: true,
   imports: [],
-  templateUrl: './register-card.component.html',
-  styleUrl: './register-card.component.css',
+  templateUrl: './choose-action.component.html',
+  styleUrl: './choose-action.component.css'
 })
-export class RegisterCardComponent implements OnInit {
+export class ChooseActionComponent implements OnInit {
 
   constructor(private session: SessionService,private router: Router) {}
 
@@ -18,5 +18,9 @@ export class RegisterCardComponent implements OnInit {
     //   this.router.navigate(['login'])
     // }
 
+  }
+
+  register(){
+    this.router.navigate(['cadastrar/card'])
   }
 }

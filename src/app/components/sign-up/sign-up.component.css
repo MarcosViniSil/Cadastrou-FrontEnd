@@ -55,3 +55,7 @@ a {
   color: red;
   font-size: 18px;
 }
+app-loading{
+  margin-top: 7px;
+  margin-bottom: 7px;
+}

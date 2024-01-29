@@ -34,10 +34,10 @@
             <input formControlName="passwordAdm" required  type="password" id="passwordAdm"><br>
             
             <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                 <div class="sendDatas">
+                 <div *ngIf="isRegisterAvailable" class="sendDatas">
                     <p (click)="registerAdm()" >Enviar</p>
                 </div>
-               
+                <app-loading *ngIf="!isRegisterAvailable"></app-loading>
              </div>
             </form>
         </div>

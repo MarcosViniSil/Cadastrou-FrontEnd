@@ -2,25 +2,27 @@
   {{ messageError }}
 </div>
 <div class="containerAll">
-  <div *ngIf="!isSend" class="containerTypeEmail">
+  <div *ngIf="isSendCode" class="containerTypeEmail">
     <h3>Digite seu email</h3>
       <form [formGroup]="userForm" class="containerTypeEmail">
         <input  formControlName="email" type="email" name="emailUser"  id="emailUser" />
-        <div class="sendDatas">
-          <p (click)="sendCode()">Enviar código</p>
+        <div *ngIf="isSendCodeAvaliable" class="sendDatas">
+          <p  (click)="sendCode()">Enviar código</p>
         </div>
+        <app-loading *ngIf="!isSendCodeAvaliable"></app-loading>
       </form>
     
   </div>
 
-   <div *ngIf="isSend" class="containerConfirmCode">
+   <div *ngIf="!isSendCode" class="containerConfirmCode">
     <h3>Digite o código enviado para o email informado</h3>
 
     <form [formGroup]="userForm2" class="containerConfirmCode">
       <input formControlName="text" type="text"  id="codeUser" />
-      <div class="sendDatas">
+      <div *ngIf="isValidateCodeAvailable" class="sendDatas">
         <p (click)="validateCode()">Confirmar</p>
       </div>
+      <app-loading *ngIf="!isValidateCodeAvailable"></app-loading>
       <a (click)="correctionEmail()">Corrigir email</a>
     </form>
   </div> 

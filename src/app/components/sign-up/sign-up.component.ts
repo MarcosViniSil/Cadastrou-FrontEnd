@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsComponent } from '../validation/forms/forms.component';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { LoadingComponent } from '../loading/loading.component';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule,LoadingComponent],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css', './sign-up-responsive.component.css'],
 })
@@ -25,6 +27,7 @@ export class SignUpComponent implements OnInit {
   userForm!: FormGroup;
   showError: Boolean = false;
   messageError: String = '';
+  isRegisterAvailable:boolean=true
   
   ngOnInit() {
     this.initForm();
@@ -52,9 +55,10 @@ export class SignUpComponent implements OnInit {
     
   }
   registerUser() {
+    if(this.isRegisterAvailable){
     this.userForm.get('email')?.enable();
     if (this.validateAllFields()) {
-  
+      this.isRegisterAvailable=false
       const result = this.userService.registerUser(this.userForm.value);
 
       result.subscribe({
@@ -62,14 +66,17 @@ export class SignUpComponent implements OnInit {
         next: (res) => {
           if (res == null) {
             this.userService.removeEmailUser()
+            this.isRegisterAvailable=true
             this.router.navigate(['login']);
           }
         },
         error: (err) => {
+          this.isRegisterAvailable=true
           this.validateForm.onError(err.error.title);
         },
       });
     }
+  }
   }
 
   private validateAllFields(): Boolean {
