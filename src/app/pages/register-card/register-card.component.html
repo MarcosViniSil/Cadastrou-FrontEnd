@@ -1,0 +1,44 @@
+<header>
+    <nav>
+      <div class="containerMenu">
+          <app-menu-logged [isToShowRegistrations]="true"></app-menu-logged>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    
+    <div class="containerFormCard">
+        <h2>Cadastre o que quiser!!!</h2>
+        <div *ngIf="showError" class="warning">
+          {{  messageError }}
+        </div>
+        <form [formGroup]="userForm" *ngIf="userForm" >
+            <label for="name">Nome</label> <br>
+            <input formControlName="name" placeholder="Nome" type="text" id="name"> <br>
+    
+            <label for="description">Descrição</label> <br>
+            <input formControlName="description"  placeholder="Descrição" type="text" id="description"> <br>
+    
+            <label for="limitdate">Data limite conclusão</label> <br>
+            <input formControlName="limitDate" type="date" id="limitdate"><br>
+           
+            <label for="frequency">Frequência de avisos via email</label> <br>
+            <select  formControlName="frequency" name="frequency" id="frequency">
+                <option value="invalid" disabled>Selecione uma frequência</option>
+                <option value="LOW">Baixa</option>
+                <option value="AVERAGE">Média</option>
+                <option value="HIGH">Alta</option>
+              </select>
+              <br>
+
+             <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                 <div *ngIf="isRegisterAvailable" class="sendDatas">
+                    <p (click)="addCard()">Cadastrar</p>
+                </div>
+                <app-loading *ngIf="!isRegisterAvailable"></app-loading>
+             </div>
+        </form>
+    </div>
+
+  </main>

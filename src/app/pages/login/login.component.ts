@@ -52,7 +52,7 @@ export class LoginComponent {
           this.tokenService.setToken(token)
           this.tokenService.setDateExpiration()
           this.isLoginAvailable=true
-          this.router.navigate(['logado'])
+          this.router.navigate(['inicial'])
         },
         error: (err) => {
           this.isLoginAvailable=true

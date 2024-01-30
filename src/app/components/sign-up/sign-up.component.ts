@@ -24,9 +24,9 @@ export class SignUpComponent implements OnInit {
     private router: Router
   ) {}
 
-  userForm!: FormGroup;
-  showError: Boolean = false;
-  messageError: String = '';
+  userForm!: FormGroup
+  showError: Boolean = false
+  messageError: String = ''
   isRegisterAvailable:boolean=true
   
   ngOnInit() {

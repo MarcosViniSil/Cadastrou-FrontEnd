@@ -1,0 +1,64 @@
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.containerFormCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgb(239, 231, 228);
+    width: 90vw;
+    padding-top: 20px;
+    border-radius: 5px;
+    -webkit-box-shadow: 23px 33px 53px -20px rgba(0,0,0,0.75);
+    -moz-box-shadow: 23px 33px 53px -20px rgba(0,0,0,0.75);
+    box-shadow: 23px 33px 53px -20px rgba(0,0,0,0.75);
+}
+input,select {
+    width: 70vw;
+    padding: 5px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+  .sendDatas {
+    background-color: rgb(46, 45, 45);
+    border: none;
+    width: 100px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+  }
+  .sendDatas > p {
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .sendDatas:active {
+    position: relative;
+    top: 2px;
+  }
+  .warning{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+    color: red;
+    font-size: 18px;
+  }
+  @media (min-width: 170px) and (max-width: 325px) {
+     .containerFormCard > h2{
+        text-align: center;
+     }
+     form{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+     }
+  }
