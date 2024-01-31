@@ -15,7 +15,7 @@ import { RegisterCardComponent } from './pages/register-card/register-card.compo
 import { LoadingComponent } from './components/loading/loading.component';
 import { ChooseActionComponent } from './components/choose-action/choose-action.component';
 import { MenuLoggedComponent } from './components/menu-logged/menu-logged.component';
-
+import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,7 +36,8 @@ import { MenuLoggedComponent } from './components/menu-logged/menu-logged.compon
     RegisterCardComponent,
     LoadingComponent,
     ChooseActionComponent,
-    MenuLoggedComponent
+    MenuLoggedComponent,
+    ViewCardsComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

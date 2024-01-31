@@ -10,6 +10,7 @@ import { RegisterCardComponent } from './pages/register-card/register-card.compo
 import { LoadingComponent } from './components/loading/loading.component';
 import { ChooseActionComponent } from './components/choose-action/choose-action.component';
 import { InitialComponent } from './pages/initial/initial.component';
+import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'email', component: EmailComponent, pathMatch: 'full' },
   { path: 'cadastrar/adm',component:SignUpADMComponent,pathMatch: 'full'},
   { path: 'cadastrar/card',component:RegisterCardComponent,pathMatch: 'full'},
+  { path: 'visualizar/card',component:ViewCardsComponent,pathMatch: 'full'},
   { path: 'inicial',component:InitialComponent,pathMatch: 'full'},
   { path: '**',component:NotFound404Component,pathMatch: 'full'}
   

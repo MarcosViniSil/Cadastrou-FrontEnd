@@ -1,0 +1,28 @@
+<header>
+    <nav>
+      <div class="containerMenu">
+          <app-menu-logged [isToShowRegistrations]="true"></app-menu-logged>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Verifique seus cadastros</h2>
+    <div class="wrapper">
+        <div *ngFor="let dog of dogs" >
+            <p style="text-align: center;" class="pName"><strong>Nome: </strong>{{ dog.name }}</p>
+            <p class="pDescription"><strong>Descrição: </strong>{{ dog.description }} anos</p>
+            <p class="pDescription2"><strong>Frequência: </strong>{{ dog.frequency }}</p>
+            <p><strong>Data conclusão: </strong> {{dog.dateFinish }}</p>
+            <div class="divActions">
+                <a href="#">Excluir</a>
+                <div class="divActionP">
+                    <p (click)="teste(dog.id)">Concluir</p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+  </main>
+
