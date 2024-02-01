@@ -2,6 +2,7 @@ import { Component,HostListener,Input } from '@angular/core';
 import { RouterOutlet,RouterLink,RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 @Component({
   selector: 'app-menu-logged',
   standalone: true,
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu-logged.component.css','./menu-logged-responsive.css']
 })
 export class MenuLoggedComponent {
-  constructor(private router: Router){}
+  constructor(private router: Router,private tokenService:TokenService){}
   isMenuOpen: boolean = false
   isUserAdm:boolean=false
   
@@ -43,7 +44,12 @@ export class MenuLoggedComponent {
     }
   }
 
-  linkRegistered(){
-    this.router.navigate(['cadastrar/card']);
+  linkInitial(){
+    this.router.navigate(['inicial']);
+  }
+  logout(){
+    this.tokenService.removeTokenUser()
+    this.tokenService.removeDataExpiration()
+    this.router.navigate(['login'])
   }
 }

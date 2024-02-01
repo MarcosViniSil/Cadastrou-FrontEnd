@@ -40,6 +40,7 @@ export class RegisterCardComponent implements OnInit {
   isRegisterAvailable: boolean = true;
   showError: Boolean = false;
   messageError: String = '';
+
   ngOnInit(): void {
     this.subscribeToFormChanges();
     this.initForm();
@@ -73,27 +74,34 @@ export class RegisterCardComponent implements OnInit {
 
   addCard() {
     if (this.validateFields()) {
-      const data: addCardData = {
-        name: this.userForm.value.name,
-        description: this.userForm.value.description,
-        dateFinish: new Date(this.userForm.value.limitDate),
-        frequency: this.userForm.value.frequency,
-      };
-      const result = this.cardService.addCard(data);
-      if (result != null) {
-        console.log(result);
-        result.subscribe({
-          next: (res) => {
-            if (res == null) {
-              console.log(res);
-            }
-          },
-          error: (err) => {
-            console.log(err);
-            this.isRegisterAvailable = true;
-            this.validateForm.onError(err.error.title);
-          },
-        });
+      if (this.isRegisterAvailable) {
+        this.isRegisterAvailable=false
+        const data: addCardData = {
+          name: this.userForm.value.name,
+          description: this.userForm.value.description,
+          dateFinish: new Date(this.userForm.value.limitDate),
+          frequency: this.userForm.value.frequency,
+        };
+
+        const result = this.cardService.addCard(data);
+        if (result != null) {
+          result.subscribe({
+            next: (res) => {
+              if (res == null) {
+                this.isRegisterAvailable = true;
+                this.router.navigate(['inicial']);
+              }
+            },
+            error: (err) => {
+              if(err.status!=0){
+                this.validateForm.onError(err.error.title);
+                }else{
+                  this.validateForm.onError("Ocorreu um erro, tente novamente")
+                }
+              this.isRegisterAvailable = true;
+            },
+          });
+        }
       }
     }
     console.log(this.userForm.value.limitDate);

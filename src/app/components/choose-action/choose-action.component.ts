@@ -23,4 +23,7 @@ export class ChooseActionComponent implements OnInit {
   register(){
     this.router.navigate(['cadastrar/card'])
   }
+  viewCards(){
+    this.router.navigate(['visualizar/card'])
+  }
 }

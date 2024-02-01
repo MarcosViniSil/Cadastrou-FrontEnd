@@ -8,9 +8,9 @@
     <div class="containerLinksLogged" id="responsive-menu">
         <ul>
             <li><a href="#">Perfil</a></li>
-            <li *ngIf="isToShowRegistrations"><a href="#">Cadastros</a></li>
+            <li *ngIf="isToShowRegistrations"><a (click)="linkInitial()">Cadastros</a></li>
             <li *ngIf="isUserAdm" ><a href="#">ADM</a></li>
-            <li ><a href="#">Sair</a></li>
+            <li ><a (click)="logout()">Sair</a></li>
            </ul>
     </div>
 </div>

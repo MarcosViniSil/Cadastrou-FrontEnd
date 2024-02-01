@@ -55,8 +55,12 @@ export class LoginComponent {
           this.router.navigate(['inicial'])
         },
         error: (err) => {
+          if(err.status!=0){
+            this.validateForm.onError(err.error.title);
+            }else{
+              this.validateForm.onError("Ocorreu um erro, tente novamente")
+            }
           this.isLoginAvailable=true
-          this.validateForm.onError(err.error.title);
         },
       });
     }

@@ -22,5 +22,23 @@ import { addCardData } from '../models/addCardData';
         }
         
       }
+        getCards(offset: number): Observable<any>|null {
+        const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
+        if(header!=null){
+           
+            return this.http.get(this.apiUrl+offset,{headers:header})
+        }else{
+            return null
+        }
+        
+      }
+      deleteCard(id:number){
+        const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
+        if(header!=null){
+        return this.http.delete(this.apiUrl+"Delete/"+id,{headers:header})
+        }else{
+            return null
+        }
+      }
 
   }
