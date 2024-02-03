@@ -47,6 +47,9 @@ export class MenuLoggedComponent {
   linkInitial(){
     this.router.navigate(['inicial']);
   }
+  profile(){
+    this.router.navigate(['perfil']);
+  }
   logout(){
     this.tokenService.removeTokenUser()
     this.tokenService.removeDataExpiration()

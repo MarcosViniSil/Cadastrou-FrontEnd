@@ -7,7 +7,7 @@
     </span>
     <div class="containerLinksLogged" id="responsive-menu">
         <ul>
-            <li><a href="#">Perfil</a></li>
+            <li><a (click)="profile()">Perfil</a></li>
             <li *ngIf="isToShowRegistrations"><a (click)="linkInitial()">Cadastros</a></li>
             <li *ngIf="isUserAdm" ><a href="#">ADM</a></li>
             <li ><a (click)="logout()">Sair</a></li>

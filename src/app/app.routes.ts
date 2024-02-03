@@ -11,6 +11,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ChooseActionComponent } from './components/choose-action/choose-action.component';
 import { InitialComponent } from './pages/initial/initial.component';
 import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'cadastrar/card',component:RegisterCardComponent,pathMatch: 'full'},
   { path: 'visualizar/card',component:ViewCardsComponent,pathMatch: 'full'},
   { path: 'inicial',component:InitialComponent,pathMatch: 'full'},
+  { path: 'perfil',component:ProfileComponent,pathMatch: 'full'},
   { path: '**',component:NotFound404Component,pathMatch: 'full'}
   
       

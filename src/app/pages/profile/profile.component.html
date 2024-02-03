@@ -1,0 +1,40 @@
+<header>
+    <nav>
+      <div class="containerMenu">
+          <app-menu-logged [isToShowRegistrations]="true"></app-menu-logged>
+      </div>
+</nav>
+<main >
+    <div class="containerForm" >
+        <div (click)="onBodyClick()" class="containerfields">
+            <h2>Visualizar perfil</h2>
+            <form [formGroup]="userForm" *ngIf="userForm" >
+            <label for="name">Nome</label> <br>
+            <input formControlName="name"  type="text" id="name"> <br>
+            <label for="email">Email</label> <br>
+            <input formControlName="email" type="email" id="email"> <br>
+            <label for="registers">Quantidade de cadastros</label> <br>
+            <input formControlName="registers"  type="number" id="registers"><br>
+            <label for="datebegin">Data de criação</label> <br>
+            <input formControlName="datebegin"  type="text" id="datebegin"><br>
+             <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                 <div  class="sendDatas">
+                    <p>Atualizar senha</p>
+                </div>
+                <!-- <app-loading ></app-loading> -->
+            
+             </div>
+            </form>
+        </div>
+        <a (click)="requestDeleteAccount()">Solicitar exclusão da conta</a>
+          
+    </div>
+
+    <div *ngIf="isToDeleteAccount" class="confirmationDeleteAccount" (click)="$event.stopPropagation()">
+        <form [formGroup]="deleteAccountForm" *ngIf="deleteAccountForm" (click)="$event.stopPropagation()">
+            <h3>Para excluir sua conta digite:<strong>Quero excluir minha conta</strong></h3>
+            <input formControlName="deleteAccount"  type="text" id="name"> 
+            <p (click)="deleteAccount()">Excluir conta</p>
+        </form>
+    </div>
+    </main>

@@ -16,6 +16,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ChooseActionComponent } from './components/choose-action/choose-action.component';
 import { MenuLoggedComponent } from './components/menu-logged/menu-logged.component';
 import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -37,7 +38,8 @@ import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
     LoadingComponent,
     ChooseActionComponent,
     MenuLoggedComponent,
-    ViewCardsComponent
+    ViewCardsComponent,
+    ProfileComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
