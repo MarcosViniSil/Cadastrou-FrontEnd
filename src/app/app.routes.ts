@@ -12,6 +12,7 @@ import { ChooseActionComponent } from './components/choose-action/choose-action.
 import { InitialComponent } from './pages/initial/initial.component';
 import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'visualizar/card',component:ViewCardsComponent,pathMatch: 'full'},
   { path: 'inicial',component:InitialComponent,pathMatch: 'full'},
   { path: 'perfil',component:ProfileComponent,pathMatch: 'full'},
+  { path: 'atualizar/senha',component:UpdatePasswordComponent,pathMatch: 'full'},
   { path: '**',component:NotFound404Component,pathMatch: 'full'}
   
       

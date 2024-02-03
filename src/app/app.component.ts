@@ -17,6 +17,7 @@ import { ChooseActionComponent } from './components/choose-action/choose-action.
 import { MenuLoggedComponent } from './components/menu-logged/menu-logged.component';
 import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -39,7 +40,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ChooseActionComponent,
     MenuLoggedComponent,
     ViewCardsComponent,
-    ProfileComponent
+    ProfileComponent,
+    UpdatePasswordComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

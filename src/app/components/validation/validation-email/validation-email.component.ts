@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef,Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { ValidateEmailService } from '../../../services/validateEmail.service';
@@ -34,7 +34,8 @@ export class ValidationEmailComponent implements OnInit {
   userForm2!: FormGroup;
   isSendCodeAvaliable: boolean = true;
   isValidateCodeAvailable: boolean = true;
-
+  @Input() isUserRegister:boolean=true
+  @Output() updatePasswordAllowed = new EventEmitter<boolean>();
   constructor(
     private formBuilder: FormBuilder,
     private validateForm: FormsComponent,
@@ -57,6 +58,7 @@ export class ValidationEmailComponent implements OnInit {
   }
 
   sendCode() {
+
     if (this.isSendCodeAvaliable) {
       if (this.validateForm.validateEmail(this.userForm.value.email)) {
         this.isSendCodeAvaliable = false
@@ -106,7 +108,12 @@ export class ValidationEmailComponent implements OnInit {
               if (res == null) {
                 this.emailService.removeCodeEmail();
                 this.isValidateCodeAvailable = true
-                this.router.navigate(['cadastrar']);
+
+                if(this.isUserRegister){
+                  this.router.navigate(['cadastrar']);
+                }else{
+                  this.changeValue()
+                }
               }
             },
             error: (err) => {
@@ -124,6 +131,10 @@ export class ValidationEmailComponent implements OnInit {
   correctionEmail() {
     this.isSendCode = true;
   }
+  changeValue() {
+    this.updatePasswordAllowed.emit(true);
+  }
+  
   subscribeToFormChanges() {
     this.validateForm.showError$.subscribe((showError) => {
       this.showError = showError;
