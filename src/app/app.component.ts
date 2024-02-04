@@ -18,6 +18,7 @@ import { MenuLoggedComponent } from './components/menu-logged/menu-logged.compon
 import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { AdmPageComponent } from './pages/adm-page/adm-page.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -41,7 +42,8 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     MenuLoggedComponent,
     ViewCardsComponent,
     ProfileComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    AdmPageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

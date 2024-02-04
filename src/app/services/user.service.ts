@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { api } from '../environments/environment';
 import { RegisterData } from '../models/registerData';
 import { LoginData } from '../models/loginData';
-import {TokenService} from './token.service'
+import { TokenService} from './token.service'
+import { updatePassword } from '../models/updatePasswordData';
 
 @Injectable({
   providedIn: 'root',
@@ -29,10 +30,43 @@ export class UserService {
       return null
     }
   }
-  requestDeleteAccount(){
+  requestDeleteAccount():Observable<any>|null{
     const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
     if(header!=null){
       return this.http.get(this.apiUrl+"Request/Delete",{headers:header})
+    }else{
+      return null
+    }
+  }
+  updatePassword(password:updatePassword):Observable<any>|null{
+    const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
+    if(header!=null){
+      return this.http.post(this.apiUrl+"Update/Password",{password},{headers:header})
+    }else{
+      return null
+    }
+  }
+
+  getRoleUser():Observable<any>|null{
+    const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
+    if(header!=null){
+      return this.http.get(this.apiUrl+"role",{headers:header})
+    }else{
+      return null
+    }
+  }
+  getUsers(offset:number):Observable<any>|null{
+    const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
+    if(header!=null){
+      return this.http.get(this.apiUrl+"List/"+offset,{headers:header})
+    }else{
+      return null
+    }
+  }
+  getUsersToDelete(offset:number):Observable<any>|null{
+    const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
+    if(header!=null){
+      return this.http.get(this.apiUrl+"List/Delete/"+offset,{headers:header})
     }else{
       return null
     }

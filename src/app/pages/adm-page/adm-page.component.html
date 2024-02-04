@@ -1,0 +1,34 @@
+<header>
+    <nav>
+        <app-menu-logged></app-menu-logged>
+    </nav>
+</header>
+<main>
+    <div class="containerChoose">
+        <p (click)="viewUsers()">Visualizar Usuários</p>
+        <p (click)="viewDelete()">Solicitações de exclusão</p>
+    </div>
+    <div *ngIf="isToShowUsers" class="containerListUsers">
+        <div class="wrapper">
+            <div *ngFor="let user of listUsers" >
+                <p class="pName"><strong>id: </strong>{{ user.id }}</p>
+                <p class="pDescription"><strong>Nome: </strong>{{ user.name }}</p>
+                <p class="pDescription2"><strong>Cadastros: </strong>{{ user.cards }}</p>
+                
+            </div>
+        </div>
+        
+        
+    </div>
+    <div *ngIf="isToDeleteUsers" class="containerUsersToDelete">
+        <h2 style="text-align: center; margin-top: 20px;">Usuários para excluir</h2>
+        <div class="wrapper">
+            <div *ngFor="let user of listUsers" >
+                <p class="pName"><strong>id: </strong>{{ user.id }}</p>
+                <p class="pDescription"><strong>Nome: </strong>{{ user.name }}</p>
+                <p class="pDescription2"><strong>Cadastros: </strong>{{ user.cards }}</p>
+                 <p>Excluir</p>
+            </div>
+        </div>
+    </div>
+</main>

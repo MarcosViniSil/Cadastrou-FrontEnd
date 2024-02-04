@@ -13,6 +13,7 @@ import { InitialComponent } from './pages/initial/initial.component';
 import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { AdmPageComponent } from './pages/adm-page/adm-page.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -25,6 +26,7 @@ export const routes: Routes = [
   { path: 'inicial',component:InitialComponent,pathMatch: 'full'},
   { path: 'perfil',component:ProfileComponent,pathMatch: 'full'},
   { path: 'atualizar/senha',component:UpdatePasswordComponent,pathMatch: 'full'},
+  { path: 'pagina/adm',component:AdmPageComponent,pathMatch: 'full'},
   { path: '**',component:NotFound404Component,pathMatch: 'full'}
   
       
