@@ -5,15 +5,15 @@
 </header>
 <main>
     <div class="containerChoose">
-        <p (click)="viewUsers()">Visualizar Usuários</p>
-        <p (click)="viewDelete()">Solicitações de exclusão</p>
+        <p (click)="getUsers()">Visualizar Usuários</p>
+        <p (click)="getUsersDelete()">Solicitações de exclusão</p>
     </div>
     <div *ngIf="isToShowUsers" class="containerListUsers">
         <div class="wrapper">
             <div *ngFor="let user of listUsers" >
                 <p class="pName"><strong>id: </strong>{{ user.id }}</p>
                 <p class="pDescription"><strong>Nome: </strong>{{ user.name }}</p>
-                <p class="pDescription2"><strong>Cadastros: </strong>{{ user.cards }}</p>
+                <p class="pDescription2"><strong>Cadastros: </strong>{{ user.numCards }}</p>
                 
             </div>
         </div>

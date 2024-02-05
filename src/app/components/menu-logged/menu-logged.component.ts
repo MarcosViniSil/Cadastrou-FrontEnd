@@ -1,4 +1,4 @@
-import { Component,HostListener,Input } from '@angular/core';
+import { Component,HostListener,Input,OnInit } from '@angular/core';
 import { RouterOutlet,RouterLink,RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -11,8 +11,9 @@ import { UserService } from '../../services/user.service';
   templateUrl: './menu-logged.component.html',
   styleUrls: ['./menu-logged.component.css','./menu-logged-responsive.css']
 })
-export class MenuLoggedComponent {
+export class MenuLoggedComponent implements OnInit {
   constructor(private router: Router,private tokenService:TokenService,private userService:UserService){}
+
   isMenuOpen: boolean = false
   isUserAdm:boolean=false
   
@@ -23,7 +24,9 @@ export class MenuLoggedComponent {
   onResize(event: any) {
     this.toggleMenuBasedOnWindowSize();
   }
-
+  ngOnInit(){
+    this.getRoleUser()
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.toggleMenuBasedOnWindowSize();
@@ -51,6 +54,9 @@ export class MenuLoggedComponent {
   profile(){
     this.router.navigate(['perfil']);
   }
+  linkAdmPage(){
+    this.router.navigate(['pagina/adm']);
+  }
   logout(){
     this.tokenService.removeTokenUser()
     this.tokenService.removeDataExpiration()
@@ -61,8 +67,9 @@ export class MenuLoggedComponent {
     if(response!=null){
       response.subscribe({
         next: (res) => {
-          if (res == null) {
-            console.log(res)
+          console.log(res)
+          if (res.role == "ADMIN") {
+            this.isUserAdm=true
           }
         },
         error: (err) => {

@@ -43,8 +43,12 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['login']);
     }
     this.initForm();
-    //this.getProfile();
+    this.getProfile();
   }
+
+   updatePassword(){
+      this.router.navigate(['atualizar/senha']);
+   }
 
   getProfile() {
     const result = this.userService.profileUser();
@@ -86,6 +90,7 @@ export class ProfileComponent implements OnInit {
     this.initDeleteAccountForm() 
   }
   deleteAccount(){
+    if(this.deleteAccountForm.value.deleteAccount === "Quero excluir minha conta"){
     const result =this.userService.requestDeleteAccount()
     if (result != null) {
       result.subscribe({
@@ -100,6 +105,9 @@ export class ProfileComponent implements OnInit {
         },
       });
     }
+  }else{
+    alert("Digite a frase corretamente")
+  }
   }
   onBodyClick() {
     this.isToDeleteAccount = false;

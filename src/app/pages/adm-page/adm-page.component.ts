@@ -14,36 +14,18 @@ export class AdmPageComponent {
   isToShowUsers:boolean=false
   offSetListUsers:number=0
   offsetDeleteUsers:number=0
-  listUsers: any[] = [
-    { id: 1, name: 'John', cards: 25 },
-    { id: 2, name: 'Jane', cards: 30 },
-    { id: 3, name: 'Bob', cards: 35 },
-    { id: 4, name: 'Alice', cards: 20 },
-    { id: 5, name: 'Mike', cards: 40 },
-  ];
-  listUsersToDelete: any[] = [
-    { id: 1, name: 'John', cards: 25 },
-    { id: 2, name: 'Jane', cards: 30 },
-    { id: 3, name: 'Bob', cards: 35 },
-    { id: 4, name: 'Alice', cards: 20 },
-    { id: 5, name: 'Mike', cards: 40 },
-  ];
+  listUsers: any[] = [];
+  listUsersToDelete: any[] = [];
   constructor(private userService: UserService) {}
-
-   viewDelete(){
-    this.isToDeleteUsers=true
-    this.isToShowUsers=false
-   }
-   viewUsers(){
+   getUsers(){
     this.isToShowUsers=true
     this.isToDeleteUsers=false
-   }
-   getUsers(){
     const response = this.userService.getUsers(this.offSetListUsers)
     if(response!=null){
       response.subscribe({
         next: (res) => {
            console.log(res)
+           this.listUsers=this.listUsers.concat(res)
            this.offSetListUsers++
         },
         error: (err) => {
@@ -53,10 +35,13 @@ export class AdmPageComponent {
     }
    }
    getUsersDelete(){
+    this.isToDeleteUsers=true
+    this.isToShowUsers=false
     const response = this.userService.getUsersToDelete(this.offsetDeleteUsers)
     if(response!=null){
       response.subscribe({
         next: (res) => {
+          this.listUsersToDelete = this.listUsersToDelete.concat(res)
            console.log(res)
            this.offsetDeleteUsers++
         },

@@ -41,7 +41,7 @@ export class UserService {
   updatePassword(password:updatePassword):Observable<any>|null{
     const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
     if(header!=null){
-      return this.http.post(this.apiUrl+"Update/Password",{password},{headers:header})
+      return this.http.post(this.apiUrl+"Update/Password",password,{headers:header})
     }else{
       return null
     }
