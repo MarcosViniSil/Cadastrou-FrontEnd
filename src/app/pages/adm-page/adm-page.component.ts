@@ -1,10 +1,10 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuLoggedComponent } from '../../components/menu-logged/menu-logged.component';
 import { AdmService } from '../../services/adm.service';
 import { SessionService } from '../../services/session.service';
 import { Router } from '@angular/router';
-
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-adm-page',
   standalone: true,
@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
   styleUrl: './adm-page.component.css',
 })
 export class AdmPageComponent implements OnInit {
-
-
   isToDeleteUsers: boolean = true;
   isToShowUsers: boolean = true;
   offSetListUsers: number = 0;
@@ -26,19 +24,24 @@ export class AdmPageComponent implements OnInit {
 
   constructor(
     private admService: AdmService,
-    private session:SessionService,
-    private router: Router
+    private session: SessionService,
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     const isAuthenticated = this.session.isAuthenticated();
     if (!isAuthenticated) {
       this.router.navigate(['login']);
+    } else {
+      if (!this.isAdm()) {
+        this.router.navigate(['inicial']);
+      }
     }
   }
 
   getUsers() {
-    this.listUsersToDelete=[]
+    this.listUsersToDelete = [];
     this.isToShowUsers = false;
     this.isToDeleteUsers = true;
     const response = this.admService.getUsers(this.offSetListUsers);
@@ -60,7 +63,7 @@ export class AdmPageComponent implements OnInit {
     }
   }
   getUsersDelete() {
-    this.listUsers = []
+    this.listUsers = [];
     this.isToDeleteUsers = false;
     this.isToShowUsers = true;
     const response = this.admService.getUsersToDelete(this.offsetDeleteUsers);
@@ -98,5 +101,27 @@ export class AdmPageComponent implements OnInit {
         },
       });
     }
+  }
+
+  isAdm(): boolean {
+    const response = this.userService.getRoleUser();
+    if (response != null) {
+      response.subscribe({
+        next: (res) => {
+          console.log(res);
+          if (res.role == 'ADMIN') {
+            return true;
+          } else {
+            return false;
+          }
+        },
+        error: (err) => {
+          console.log(err);
+          return false;
+        },
+      });
+    }
+    return false;
+  
   }
 }
