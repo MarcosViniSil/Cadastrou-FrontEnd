@@ -1,0 +1,30 @@
+<header>
+    <nav>
+      <div class="containerMenu">
+          <app-menu-logged [isToShowRegistrations]="true"></app-menu-logged>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Verifique seus cadastros</h2>
+    <h3 style="text-align: center;" *ngIf="!hasCards">Você não possui cadastros</h3>
+    <div class="wrapper">
+        <div *ngFor="let card of cards" >
+            <p style="text-align: center;" class="pName"><strong>Nome: </strong>{{ card.name }}</p>
+            <p class="pDescription"><strong>Descrição: </strong>{{ card.description }} </p>
+            <p class="pDescription2"><strong>Frequência: </strong>{{ card.frequency }}</p>
+            <p><strong>Data conclusão: </strong> {{card.dateFinish }}</p>
+            <div class="divActions">
+                <a (click)="deleteCard(card.id)">Excluir</a>
+            </div>
+            
+        </div>
+    </div>
+    <div *ngIf="!isFinishCards" class="containerSeeMore">
+       <a  (click)="getListCards()">Ver mais</a> 
+    </div>
+    
+    
+  </main>
+

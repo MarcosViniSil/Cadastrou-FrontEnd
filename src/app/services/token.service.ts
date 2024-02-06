@@ -47,4 +47,14 @@ export class TokenService {
       return null;
     }
   }
+  removeTokenUser(){
+    if (typeof localStorage !== 'undefined') {
+       localStorage.removeItem('JWT')
+    }
+  }
+  removeDataExpiration(){
+    if (typeof localStorage !== 'undefined') {
+       localStorage.removeItem('ExpirationDate')
+    }
+  }
 }

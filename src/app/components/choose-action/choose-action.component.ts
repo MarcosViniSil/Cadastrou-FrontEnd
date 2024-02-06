@@ -10,17 +10,20 @@ import { Router } from '@angular/router';
 })
 export class ChooseActionComponent implements OnInit {
 
-  constructor(private session: SessionService,private router: Router) {}
+  constructor( private session: SessionService,private router: Router) {}
 
   ngOnInit(): void {
-    // const isAuthenticated = this.session.isAuthenticated()
-    // if(!isAuthenticated){
-    //   this.router.navigate(['login'])
-    // }
+     const isAuthenticated = this.session.isAuthenticated()
+     if(!isAuthenticated){
+       this.router.navigate(['login'])
+    }
 
   }
 
   register(){
     this.router.navigate(['cadastrar/card'])
+  }
+  viewCards(){
+    this.router.navigate(['visualizar/card'])
   }
 }

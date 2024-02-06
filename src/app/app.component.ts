@@ -11,10 +11,14 @@ import { ValidationEmailComponent } from './components/validation/validation-ema
 import { EmailComponent } from './pages/email/email.component';
 import { NotFound404Component } from './pages/not-found404/not-found404.component';
 import { SignUpADMComponent } from './pages/sign-up-adm/sign-up-adm.component';
-import { RegisterCardComponent } from './components/register-card/register-card.component';
+import { RegisterCardComponent } from './pages/register-card/register-card.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { ChooseActionComponent } from './components/choose-action/choose-action.component';
 import { MenuLoggedComponent } from './components/menu-logged/menu-logged.component';
+import { ViewCardsComponent } from './pages/view-cards/view-cards.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { AdmPageComponent } from './pages/adm-page/adm-page.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -35,7 +39,11 @@ import { MenuLoggedComponent } from './components/menu-logged/menu-logged.compon
     RegisterCardComponent,
     LoadingComponent,
     ChooseActionComponent,
-    MenuLoggedComponent
+    MenuLoggedComponent,
+    ViewCardsComponent,
+    ProfileComponent,
+    UpdatePasswordComponent,
+    AdmPageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

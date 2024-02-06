@@ -1,7 +1,9 @@
-import { Component,HostListener,Input } from '@angular/core';
+import { Component,HostListener,Input,OnInit } from '@angular/core';
 import { RouterOutlet,RouterLink,RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
+import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-menu-logged',
   standalone: true,
@@ -9,8 +11,9 @@ import { Router } from '@angular/router';
   templateUrl: './menu-logged.component.html',
   styleUrls: ['./menu-logged.component.css','./menu-logged-responsive.css']
 })
-export class MenuLoggedComponent {
-  constructor(private router: Router){}
+export class MenuLoggedComponent implements OnInit {
+  constructor(private router: Router,private tokenService:TokenService,private userService:UserService){}
+
   isMenuOpen: boolean = false
   isUserAdm:boolean=false
   
@@ -21,7 +24,9 @@ export class MenuLoggedComponent {
   onResize(event: any) {
     this.toggleMenuBasedOnWindowSize();
   }
-
+  ngOnInit(){
+    this.getRoleUser()
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     this.toggleMenuBasedOnWindowSize();
@@ -43,7 +48,34 @@ export class MenuLoggedComponent {
     }
   }
 
-  linkRegistered(){
-    this.router.navigate(['cadastrar/card']);
+  linkInitial(){
+    this.router.navigate(['inicial']);
+  }
+  profile(){
+    this.router.navigate(['perfil']);
+  }
+  linkAdmPage(){
+    this.router.navigate(['pagina/adm']);
+  }
+  logout(){
+    this.tokenService.removeTokenUser()
+    this.tokenService.removeDataExpiration()
+    this.router.navigate(['login'])
+  }
+  getRoleUser(){
+    const response = this.userService.getRoleUser()
+    if(response!=null){
+      response.subscribe({
+        next: (res) => {
+          console.log(res)
+          if (res.role == "ADMIN") {
+            this.isUserAdm=true
+          }
+        },
+        error: (err) => {
+           console.log(err)
+        },
+      });
+    }
   }
 }

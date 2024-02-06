@@ -12,7 +12,6 @@ export class SessionService {
 
     if (dateToken == null) {
       this.router.navigate(['login']);
-      console.log("dateToken == null")
       return false;
     } else {
       let dateActual: RegExpMatchArray | null = this.getAllFieldsDate(
