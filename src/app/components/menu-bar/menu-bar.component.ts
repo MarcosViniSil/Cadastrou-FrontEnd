@@ -2,7 +2,7 @@ import { Component,HostListener,Input } from '@angular/core';
 import { RouterOutlet,RouterLink,RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { SessionService } from '../../services/session.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
   templateUrl: './menu-bar.component.html',
   styleUrls: ['./menu-bar.component.css', './menu-bar-responsive.css'],
 })
-export class MenuBarComponent{
-  constructor(private router: Router){}
-  isMenuOpen: boolean = false
+export class MenuBarComponent {
+  constructor(private router: Router,private session:SessionService){}
 
+
+
+
+  isMenuOpen: boolean = false
   @Input()
   showLogin:boolean=true
   @Input()
@@ -52,5 +55,7 @@ export class MenuBarComponent{
     linkEmail(){
       this.router.navigate(['email']);
     }
-
+   linkPageInitial(){
+    this.router.navigate(['inicial']);
+   }
 }

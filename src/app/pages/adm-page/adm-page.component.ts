@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuLoggedComponent } from '../../components/menu-logged/menu-logged.component';
-import { UserService } from '../../services/user.service';
 import { AdmService } from '../../services/adm.service';
+import { SessionService } from '../../services/session.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-adm-page',
   standalone: true,
@@ -10,7 +12,9 @@ import { AdmService } from '../../services/adm.service';
   templateUrl: './adm-page.component.html',
   styleUrl: './adm-page.component.css',
 })
-export class AdmPageComponent {
+export class AdmPageComponent implements OnInit {
+
+
   isToDeleteUsers: boolean = true;
   isToShowUsers: boolean = true;
   offSetListUsers: number = 0;
@@ -21,9 +25,18 @@ export class AdmPageComponent {
   isFinishUsersToDelete: boolean = false;
 
   constructor(
-    private userService: UserService,
-    private admService: AdmService
+    private admService: AdmService,
+    private session:SessionService,
+    private router: Router
   ) {}
+
+  ngOnInit(): void {
+    const isAuthenticated = this.session.isAuthenticated();
+    if (!isAuthenticated) {
+      this.router.navigate(['login']);
+    }
+  }
+
   getUsers() {
     this.listUsersToDelete=[]
     this.isToShowUsers = false;
