@@ -86,4 +86,8 @@ export class LoginComponent {
       this.messageError = messageError;
     });
   }
+
+  forgotPassword(){
+    this.router.navigate(['atualizar/senha'])
+  }
 }

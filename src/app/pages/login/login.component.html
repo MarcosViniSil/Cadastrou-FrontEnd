@@ -26,7 +26,7 @@
                 <label for="password">Senha</label> <br>
                 <input formControlName="password" required minlength="8" maxlength="20" type="password" id="password"><br>
 
-                 <a href="#">Esqueci minha senha</a>
+                 <a  (click)="forgotPassword()">Esqueci minha senha</a>
                  
                  <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
                      <div *ngIf="isLoginAvailable" class="sendDatas">

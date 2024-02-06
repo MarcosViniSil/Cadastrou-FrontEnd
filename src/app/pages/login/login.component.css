@@ -34,6 +34,7 @@ app-menu-bar {
   }
   a {
     color: black;
+    cursor: pointer;
   }
   .sendDatas {
     background-color: rgb(46, 45, 45);
