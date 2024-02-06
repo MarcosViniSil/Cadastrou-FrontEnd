@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuLoggedComponent } from '../../components/menu-logged/menu-logged.component';
 import { UserService } from '../../services/user.service';
+import { AdmService } from '../../services/adm.service';
 @Component({
   selector: 'app-adm-page',
   standalone: true,
@@ -10,46 +11,79 @@ import { UserService } from '../../services/user.service';
   styleUrl: './adm-page.component.css',
 })
 export class AdmPageComponent {
-  isToDeleteUsers:boolean=false
-  isToShowUsers:boolean=false
-  offSetListUsers:number=0
-  offsetDeleteUsers:number=0
+  isToDeleteUsers: boolean = true;
+  isToShowUsers: boolean = true;
+  offSetListUsers: number = 0;
+  offsetDeleteUsers: number = 0;
   listUsers: any[] = [];
   listUsersToDelete: any[] = [];
-  constructor(private userService: UserService) {}
-   getUsers(){
-    this.isToShowUsers=true
-    this.isToDeleteUsers=false
-    const response = this.userService.getUsers(this.offSetListUsers)
-    if(response!=null){
-      response.subscribe({
-        next: (res) => {
-           console.log(res)
-           this.listUsers=this.listUsers.concat(res)
-           this.offSetListUsers++
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
-   }
-   getUsersDelete(){
-    this.isToDeleteUsers=true
-    this.isToShowUsers=false
-    const response = this.userService.getUsersToDelete(this.offsetDeleteUsers)
-    if(response!=null){
-      response.subscribe({
-        next: (res) => {
-          this.listUsersToDelete = this.listUsersToDelete.concat(res)
-           console.log(res)
-           this.offsetDeleteUsers++
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
-   }
+  isFinishUsers: boolean = false;
+  isFinishUsersToDelete: boolean = false;
 
+  constructor(
+    private userService: UserService,
+    private admService: AdmService
+  ) {}
+  getUsers() {
+    this.listUsersToDelete=[]
+    this.isToShowUsers = false;
+    this.isToDeleteUsers = true;
+    const response = this.admService.getUsers(this.offSetListUsers);
+    if (response != null) {
+      response.subscribe({
+        next: (res) => {
+          this.listUsers = this.listUsers.concat(res);
+          if (res.length == 4) {
+            this.offSetListUsers++;
+            this.isFinishUsers = false;
+          } else if (res.length < 4) {
+            this.isFinishUsers = true;
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+  getUsersDelete() {
+    this.listUsers = []
+    this.isToDeleteUsers = false;
+    this.isToShowUsers = true;
+    const response = this.admService.getUsersToDelete(this.offsetDeleteUsers);
+    if (response != null) {
+      response.subscribe({
+        next: (res) => {
+          this.listUsersToDelete = this.listUsersToDelete.concat(res);
+          if (res.length == 4) {
+            this.offsetDeleteUsers++;
+            this.isFinishUsersToDelete = false;
+          } else if (res.length < 4) {
+            this.isFinishUsersToDelete = true;
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
+
+  deleteUser(id: number) {
+    const response = this.admService.deleteUserById(id);
+    if (response != null) {
+      response.subscribe({
+        next: (res) => {
+          if (res == null) {
+            this.listUsersToDelete = this.listUsersToDelete.filter(
+              (user) => user.id !== id
+            );
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
+  }
 }

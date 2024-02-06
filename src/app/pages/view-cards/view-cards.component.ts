@@ -47,8 +47,8 @@ export class ViewCardsComponent implements OnInit {
             this.hasCards = true;
             this.isFinishCards = false;
           } else if (res.card.length < 4) {
-            this.modifyArray(res.card);
-            this.cards = this.cards.concat(res.card);
+            let array=this.modifyArray(res.card);
+            this.cards = this.cards.concat(array);
             this.isFinishCards = true;
             this.hasCards = true;
           }

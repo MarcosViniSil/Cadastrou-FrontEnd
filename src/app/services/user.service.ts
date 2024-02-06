@@ -55,22 +55,9 @@ export class UserService {
       return null
     }
   }
-  getUsers(offset:number):Observable<any>|null{
-    const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
-    if(header!=null){
-      return this.http.get(this.apiUrl+"List/"+offset,{headers:header})
-    }else{
-      return null
-    }
-  }
-  getUsersToDelete(offset:number):Observable<any>|null{
-    const header:HttpHeaders | null = this.tokenService.createAuthorizationHeader()
-    if(header!=null){
-      return this.http.get(this.apiUrl+"List/Delete/"+offset,{headers:header})
-    }else{
-      return null
-    }
-  }
+
+
+
   getEmailUser(): string | null {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem('email');

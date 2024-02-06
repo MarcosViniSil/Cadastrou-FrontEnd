@@ -5,10 +5,10 @@
 </header>
 <main>
     <div class="containerChoose">
-        <p (click)="getUsers()">Visualizar Usuários</p>
-        <p (click)="getUsersDelete()">Solicitações de exclusão</p>
+        <p *ngIf="isToShowUsers" (click)="getUsers()">Visualizar Usuários</p>
+        <p *ngIf="isToDeleteUsers" (click)="getUsersDelete()">Solicitações de exclusão</p>
     </div>
-    <div *ngIf="isToShowUsers" class="containerListUsers">
+    <div *ngIf="!isToShowUsers" class="containerListUsers">
         <div class="wrapper">
             <div *ngFor="let user of listUsers" >
                 <p class="pName"><strong>id: </strong>{{ user.id }}</p>
@@ -17,18 +17,23 @@
                 
             </div>
         </div>
-        
+        <div *ngIf="!isFinishUsers" class="containerSeeMore">
+            <a  (click)="getUsers()">Ver mais</a> 
+         </div>
         
     </div>
-    <div *ngIf="isToDeleteUsers" class="containerUsersToDelete">
+    <div *ngIf="!isToDeleteUsers" class="containerUsersToDelete">
         <h2 style="text-align: center; margin-top: 20px;">Usuários para excluir</h2>
         <div class="wrapper">
-            <div *ngFor="let user of listUsers" >
+            <div *ngFor="let user of listUsersToDelete" >
                 <p class="pName"><strong>id: </strong>{{ user.id }}</p>
                 <p class="pDescription"><strong>Nome: </strong>{{ user.name }}</p>
                 <p class="pDescription2"><strong>Cadastros: </strong>{{ user.cards }}</p>
-                 <p>Excluir</p>
+                 <p (click)="deleteUser(user.id)" style="color:red;text-align: center;cursor:pointer;">Excluir</p>
             </div>
         </div>
+        <div *ngIf="!isFinishUsersToDelete" class="containerSeeMore">
+            <a  (click)="getUsersDelete()">Ver mais</a> 
+         </div>
     </div>
 </main>
