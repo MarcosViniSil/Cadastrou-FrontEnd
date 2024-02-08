@@ -104,7 +104,7 @@ export class RegisterCardComponent implements OnInit {
         }
       }
     }
-    console.log(this.userForm.value.limitDate);
+
   }
   subscribeToFormChanges() {
     this.validateForm.showError$.subscribe((showError) => {

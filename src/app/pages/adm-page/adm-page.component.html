@@ -28,7 +28,7 @@
             <div *ngFor="let user of listUsersToDelete" >
                 <p class="pName"><strong>id: </strong>{{ user.id }}</p>
                 <p class="pDescription"><strong>Nome: </strong>{{ user.name }}</p>
-                <p class="pDescription2"><strong>Cadastros: </strong>{{ user.cards }}</p>
+                <p class="pDescription2"><strong>Email: </strong>{{ user.email }}</p>
                  <p (click)="deleteUser(user.id)" style="color:red;text-align: center;cursor:pointer;">Excluir</p>
             </div>
         </div>

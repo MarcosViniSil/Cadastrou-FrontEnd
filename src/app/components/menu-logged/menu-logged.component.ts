@@ -67,7 +67,6 @@ export class MenuLoggedComponent implements OnInit {
     if(response!=null){
       response.subscribe({
         next: (res) => {
-          console.log(res)
           if (res.role == "ADMIN") {
             this.isUserAdm=true
           }

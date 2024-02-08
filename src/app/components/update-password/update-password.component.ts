@@ -57,7 +57,6 @@ export class UpdatePasswordComponent implements OnInit {
   updatePassword() {
     if(this.isUpdatePasswordAvailable){
     if (this.validatePassword()) {
-      console.log("ssss")
       this.isUpdatePasswordAvailable=false
       const pasword: updatePassword = {
         password: this.passwordForm.value.password,
@@ -67,7 +66,6 @@ export class UpdatePasswordComponent implements OnInit {
       if (response != null) {
         response.subscribe({
           next: (res) => {
-            console.log(res)
             this.isUpdatePasswordAvailable=true
             if (res == null) {
               this.tokenService.removeTokenUser()
@@ -82,7 +80,7 @@ export class UpdatePasswordComponent implements OnInit {
         });
       }
     }else{
-      alert("As senhas devem ser iguais e deve ser maior que 8 e menor que 20")
+      alert("As senhas devem ser iguais e devem ser maior que 8 e menor que 20")
     }
   }
   }

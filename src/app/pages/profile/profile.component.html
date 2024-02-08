@@ -17,14 +17,12 @@
             <input formControlName="registers"  type="number" id="registers"><br>
             <label for="datebegin">Data de criação</label> <br>
             <input formControlName="datebegin"  type="text" id="datebegin"><br>
-             <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                 <div  class="sendDatas">
-                    <p (click)="updatePassword()">Atualizar senha</p>
-                    <p></p>
-                </div>
-                <!-- <app-loading ></app-loading> -->
+            <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;margin-bottom: 20px;">
+                <p style="cursor:pointer;font-size: larger;" (click)="updatePassword()">Atualizar senha</p>
+            </div>
+              
             
-             </div>
+             
             </form>
         </div>
         <a (click)="requestDeleteAccount()">Solicitar exclusão da conta</a>

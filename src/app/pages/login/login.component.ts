@@ -55,12 +55,16 @@ export class LoginComponent {
           this.router.navigate(['inicial'])
         },
         error: (err) => {
-          if(err.status!=0){
+          console.log(err)
+          if(err.status!=0 && err.status!=403){
             this.validateForm.onError(err.error.title);
-            }else{
+            }else if(err.status==0){
               this.validateForm.onError("Ocorreu um erro, tente novamente")
+            }else if(err.status==403){
+              this.validateForm.onError("senha incorreta")
             }
           this.isLoginAvailable=true
+          this.router.navigate(['login'])
         },
       });
     }

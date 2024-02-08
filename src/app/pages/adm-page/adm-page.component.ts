@@ -34,8 +34,18 @@ export class AdmPageComponent implements OnInit {
     if (!isAuthenticated) {
       this.router.navigate(['login']);
     } else {
-      if (!this.isAdm()) {
-        this.router.navigate(['inicial']);
+      const response = this.userService.getRoleUser();
+      if (response != null) {
+        response.subscribe({
+          next: (res) => {
+            if (res.role !== 'ADMIN') {
+              this.router.navigate(['inicial']);
+            }
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
       }
     }
   }
@@ -70,6 +80,7 @@ export class AdmPageComponent implements OnInit {
     if (response != null) {
       response.subscribe({
         next: (res) => {
+          console.log(res)
           this.listUsersToDelete = this.listUsersToDelete.concat(res);
           if (res.length == 4) {
             this.offsetDeleteUsers++;
@@ -101,27 +112,5 @@ export class AdmPageComponent implements OnInit {
         },
       });
     }
-  }
-
-  isAdm(): boolean {
-    const response = this.userService.getRoleUser();
-    if (response != null) {
-      response.subscribe({
-        next: (res) => {
-          console.log(res);
-          if (res.role == 'ADMIN') {
-            return true;
-          } else {
-            return false;
-          }
-        },
-        error: (err) => {
-          console.log(err);
-          return false;
-        },
-      });
-    }
-    return false;
-  
   }
 }
